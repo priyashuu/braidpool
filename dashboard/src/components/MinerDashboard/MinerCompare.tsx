@@ -7,7 +7,7 @@ import {
   GitCompare,
 } from "lucide-react"
 
-import { BEADS } from "./constants"
+import { BEADS } from "./utils/constants"
 import { useComparisonData } from "./Hooks/useComparisonData"
 import AdvancedChart from "./AdvancedChart"
 

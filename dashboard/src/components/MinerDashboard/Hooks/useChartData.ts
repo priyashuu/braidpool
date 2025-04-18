@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import { TIME_RANGES } from "../constants"
-import type { ChartDataPoint } from "../types"
+import { TIME_RANGES } from "../utils/constants"
+import type { ChartDataPoint } from "../utils/types"
 export function useChartData(timeRange: string) {
   const [data, setData] = useState<ChartDataPoint[]>([])
   const [isLoading, setIsLoading] = useState(true)

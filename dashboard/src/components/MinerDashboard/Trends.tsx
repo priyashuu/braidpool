@@ -4,7 +4,7 @@ import { Zap, Activity, Database, TrendingUp, ArrowUpRight, Cpu } from "lucide-r
 import AdvancedChart from "./AdvancedChart"
 import AnimatedStatCard from "./AnimatedStatCard"
 import { useChartData } from "./Hooks/useChartData"
-import type { TimeRange, Bead, Transaction } from "./types"
+import type { TimeRange, Bead, Transaction } from "./utils/types"
 
 export function TrendsTab({ timeRange }: { timeRange: string }) {
   const [activeSubTab, setActiveSubTab] = useState("hashrate")

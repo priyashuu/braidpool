@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Activity } from "lucide-react"
-import type { Transaction } from "./types"
+import type { Transaction } from "./utils/types"
 
 interface TransactionListProps {
   transactions: Transaction[]
