@@ -3,6 +3,9 @@ import { motion } from "framer-motion"
 import { Activity } from "lucide-react"
 import type { Transaction } from "./lib/types"
 
+
+import { shortenHash } from "./lib/utils/shortenHash"
+
 interface TransactionListProps {
   transactions: Transaction[]
 }
@@ -66,7 +69,8 @@ export default function TransactionList({ transactions }: TransactionListProps) 
                 animate={{ opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, delay: index * 0.5 }}
               >
-                {transaction.hash}
+                
+                {shortenHash(transaction.hash)}
               </motion.span>
               {/* Tooltip on hover */}
               {hoveredTransaction === transaction.id && (

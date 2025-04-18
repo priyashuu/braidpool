@@ -1,23 +1,16 @@
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, Zap } from "lucide-react";
+import TransactionList from "./TransactionList";
+import { shortenHash } from "./lib/utils/shortenHash";
 
-import { motion, AnimatePresence} from "framer-motion"
-import {
-  ChevronDown,
-  
-  Zap,
-
-} from "lucide-react"
-
-import TransactionList from "./TransactionList"
-
-import type { Bead, Transaction } from "./lib/types"
+import type { Bead, Transaction } from "./lib/types";
 
 interface MinerRowProps {
-  bead: Bead
-  isExpanded: boolean
-  onToggle: (beadId: string) => void
-
-  isActive: boolean
-  transactions: Transaction[]
+  bead: Bead;
+  isExpanded: boolean;
+  onToggle: (beadId: string) => void;
+  isActive: boolean;
+  transactions: Transaction[];
 }
 
 export default function BeadRow({
@@ -28,12 +21,12 @@ export default function BeadRow({
   transactions,
   onParentClick,
 }: {
-  bead: Bead
-  isExpanded: boolean
-  onToggle: (beadId: string) => void
-  isActive: boolean
-  transactions: Transaction[]
-  onParentClick: (parentHash: string) => void
+  bead: Bead;
+  isExpanded: boolean;
+  onToggle: (beadId: string) => void;
+  isActive: boolean;
+  transactions: Transaction[];
+  onParentClick: (parentHash: string) => void;
 }) {
   return (
     <div className="border-b border-gray-800/80">
@@ -102,11 +95,11 @@ export default function BeadRow({
                 key={index}
                 className="text-cyan-400 font-mono text-sm hover:text-cyan-300 hover:underline"
                 onClick={(e) => {
-                  e.stopPropagation()
-                  onParentClick(parent)
+                  e.stopPropagation();
+                  onParentClick(parent);
                 }}
               >
-                {parent}
+                {shortenHash(parent)}
               </button>
             ))}
           </div>
@@ -127,5 +120,5 @@ export default function BeadRow({
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 }
