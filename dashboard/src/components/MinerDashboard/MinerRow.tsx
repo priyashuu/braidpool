@@ -9,7 +9,7 @@ import {
 
 import TransactionList from "./TransactionList"
 
-import type { Bead, Transaction } from "./utils/types"
+import type { Bead, Transaction } from "./lib/types"
 
 interface MinerRowProps {
   bead: Bead

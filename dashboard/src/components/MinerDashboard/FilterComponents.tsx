@@ -2,7 +2,7 @@ import DateRangePicker from "./DateRangePicker";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { BEADS } from "./utils/constants";
+import { BEADS } from "./lib/constants";
 
 import { ChevronDown, Calendar, Search, Filter } from "lucide-react";
 

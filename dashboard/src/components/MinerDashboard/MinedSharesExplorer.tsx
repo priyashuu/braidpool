@@ -5,7 +5,7 @@ import { FilterBar } from "./FilterComponents"
 
 import BeadRow from "./MinerRow"
 
-import { BEADS, TRANSACTIONS, BLOCKS } from "./utils/constants"
+import { BEADS, TRANSACTIONS, BLOCKS } from "./lib/constants"
 import { useChartData } from "./Hooks/useChartData"
 import { Layers } from "lucide-react"
 
