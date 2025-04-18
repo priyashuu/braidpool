@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react"
 import { useTransform, useScroll } from "framer-motion"
 import DashboardHeader from "./DashboardHeader"
-import { FilterBar } from "./FilterComponents"
+import { FilterBar } from "./FilterBar/FilterBar"
 
 import BeadRow from "./MinerRow"
 
@@ -9,7 +9,7 @@ import { BEADS, TRANSACTIONS, BLOCKS } from "./lib/constants"
 import { useChartData } from "./Hooks/useChartData"
 import { Layers } from "lucide-react"
 
-import { TrendsTab } from "./Trends"
+import { TrendsTab } from "./Trends/TrendsTab"
 
 export default function MinedSharesExplorer() {
   const [expandedBeads, setExpandedBeads] = useState({
