@@ -17,7 +17,7 @@ interface RewardDataPoint {
   transactions: number;
 }
 
-import { TIME_RANGES } from '../lib/constants';
+import { TIME_RANGES } from '../../../pages/BeadsTab/lib/constants';
 
 export function RewardHistoryChart() {
   const [data, setData] = useState<RewardDataPoint[]>([]);

@@ -19,12 +19,10 @@ function formatWork(difficulty: number): { value: string; unit: string } {
   const units = ['GH', 'TH', 'PH', 'EH'];
   let work = difficulty / 1e9;
   let i = 0;
-
   while (work >= 1000 && i < units.length - 1) {
     work /= 1000;
     i++;
   }
-
   return {
     value: work >= 1e21 ? work.toExponential(4) : work.toFixed(2),
     unit: units[i],
@@ -52,14 +50,14 @@ export default function BeadRow({
     <div className="border-b border-gray-800/80">
       <motion.div
         className={`grid sm:grid-cols-2 md:grid-cols-5 gap-2 p-4 cursor-pointer transition-colors duration-300  relative overflow-hidden ${
-          isActive ? 'bg-blue-900/30' : ''
+          isActive ? '' : ''
         }`}
         onClick={() => onToggle(bead.id)}
         onKeyDown={handleKeyToggle}
         role="button"
         tabIndex={0}
         whileHover={{
-          backgroundColor: 'rgba(30, 58, 138, 0.2)',
+          
           transition: { duration: 0.2 },
           height: 140,
         }}
@@ -68,7 +66,7 @@ export default function BeadRow({
       >
         {isActive && (
           <motion.div
-            className="absolute inset-0 bg-blue-500/20 rounded-full"
+            className="absolute inset-0 rounded-full"
             initial={{ scale: 0, x: '50%', y: '50%' }}
             animate={{ scale: 5, opacity: [1, 0] }}
             transition={{ duration: 0.8 }}

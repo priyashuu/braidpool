@@ -10,7 +10,7 @@ import {
   Divider,
   Button,
 } from '@mui/material';
-import Card from '../common/Card';
+import Card from '../../components/common/Card';
 import colors from '../../theme/colors';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import CodeIcon from '@mui/icons-material/Code';

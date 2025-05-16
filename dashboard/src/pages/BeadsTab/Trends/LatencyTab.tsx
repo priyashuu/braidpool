@@ -1,4 +1,4 @@
-import AdvancedChart from '../AdvancedChart';
+import AdvancedChart from '../../../components/Beads/AdvancedChart';
 import AnimatedStatCard from '../AnimatedStatCard';
 import { Activity, ArrowUpRight, Cpu } from 'lucide-react';
 

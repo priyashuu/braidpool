@@ -9,7 +9,7 @@ import {
   Box,
   Typography,
 } from '@mui/material';
-import Card from '../common/Card';
+import Card from '../../components/common/Card';
 import colors from '../../theme/colors';
 
 // Mock data for recent blocks

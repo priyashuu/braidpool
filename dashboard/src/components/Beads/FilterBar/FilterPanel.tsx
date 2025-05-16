@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { BEADS } from '../lib/constants';
+import { BEADS } from '../../../pages/BeadsTab/lib/constants';
 import { ChevronDown, Calendar, Search } from 'lucide-react';
 
 interface FilterPanelProps {

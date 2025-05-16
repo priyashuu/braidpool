@@ -107,7 +107,7 @@ export default function AnimatedStatCard({
 
       {/* Hover glow effect */}
       <motion.div
-        className="absolute inset-0 bg-blue-500/5 opacity-0 pointer-events-none"
+        className="absolute inset-0 opacity-0 pointer-events-none"
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
       />

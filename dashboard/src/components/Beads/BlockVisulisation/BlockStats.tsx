@@ -1,5 +1,5 @@
 import { Activity, Layers, Database, Clock } from 'lucide-react';
-import AnimatedStatCard from '../AnimatedStatCard';
+import AnimatedStatCard from '../../../pages/BeadsTab/AnimatedStatCard';
 export function BlockStats() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">

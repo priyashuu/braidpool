@@ -1,12 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
-import {
-  ArrowUpRight,
-  ArrowDownRight,
-  Maximize2,
-  RefreshCw,
-  Download,
-} from 'lucide-react';
+import {ArrowUpRight,ArrowDownRight,Maximize2,RefreshCw,Download} from 'lucide-react';
 
 type TrendType = 'up' | 'down' | 'neutral';
 

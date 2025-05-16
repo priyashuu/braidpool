@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import * as d3 from 'd3';
 import colors from '../../theme/colors';
-import Card from '../common/Card';
+import Card from '../../components/common/Card';
 
 // Mock data for the hashrate over time
 const mockHashrateData = [

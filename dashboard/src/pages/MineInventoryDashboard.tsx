@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Typography,
-  Grid,
-  Paper,
-  Chip,
-  Button,
-  Tooltip,
-} from '@mui/material';
-import colors from '../../theme/colors';
-import Card from '../common/Card';
+import {Box,Typography,  Paper,Chip,Button,Tooltip,} from '@mui/material';
+import colors from '@/theme/colors';
+import Card from '@/components/common/Card';
 import SpeedIcon from '@mui/icons-material/Speed';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
@@ -17,6 +9,7 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+
 
 // Mock data for mining devices
 const mockMiners = [

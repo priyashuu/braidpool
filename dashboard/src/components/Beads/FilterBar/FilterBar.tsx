@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Filter } from 'lucide-react';
-import DateRangePicker from '../DateRangePicker';
+import DateRangePicker from '../../../pages/BeadsTab/DateRangePicker';
 import FilterPanel from './FilterPanel';
 
 export interface FilterBarProps {

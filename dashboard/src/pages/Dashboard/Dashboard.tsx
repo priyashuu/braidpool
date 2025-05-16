@@ -19,11 +19,11 @@ import MemoryIcon from '@mui/icons-material/Memory';
 import LayersIcon from '@mui/icons-material/Layers';
 
 // Components
-import TopStatsBar from '../common/TopStatsBar';
-import Card from '../common/Card';
-import Header from '../common/Header';
+import TopStatsBar from '../../components/common/TopStatsBar';
+import Card from '../../components/common/Card';
+import Header from '../../components/common/Header';
 import InstallationInstructions from '../Installation/InstallationInstructions';
-import MineInventoryDashboard from '../BeadsTab/MineInventoryDashboard';
+import MineInventoryDashboard from '../MineInventoryDashboard';
 import PoolHashrateChart from './PoolHashrateChart';
 import MempoolLatencyStats from './MempoolLatencyStats';
 import RecentBlocksTable from './RecentBlocksTable';
