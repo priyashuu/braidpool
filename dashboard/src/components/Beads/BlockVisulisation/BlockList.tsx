@@ -9,15 +9,10 @@ export function BlockList({
   animateBlocks: boolean;
   isLoaded: boolean;
 }) {
-  if (!isLoaded)
-    return (
-      <div className="flex justify-center py-12">
-        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
   return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-7 gap-4 px-4 py-2 border-b border-gray-800/80 text-sm font-medium text-gray-400 sm:grid sm:grid-cols-3 sm-grid-rows-2">
+    <div className="space-y-2">
+     
+      <div className="grid grid-cols-7 gap-4 px-4 py-2 border-b border-gray-800/80 text-sm font-medium text-gray-400">
         <div>Height</div>
         <div>Time</div>
         <div>Miner</div>
@@ -26,38 +21,42 @@ export function BlockList({
         <div>Difficulty</div>
         <div></div>
       </div>
-      {blockVisualizationData.map((block, index) => (
-        <motion.div
-          key={block.id}
-          className="grid grid-cols-7 gap-4 px-4 py-3 rounded-lg items-center sm:grid sm:grid-rows-3 hover:bg-gray-800/30 transition-colors h-15"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{
-            opacity: animateBlocks ? 1 : 0,
-            y: animateBlocks ? 0 : 20,
-          }}
-          transition={{ duration: 0.3, delay: index * 0.03 }}
+
+      
+      {blockVisualizationData.length === 0 && (
+        <div className="text-center text-gray-400 py-8">No blocks found.</div>
+      )}
+
+      {blockVisualizationData.slice(0, 20).map((block, index) => (
+        <div
+          key={block.id || index}
+          className="relative grid grid-cols-7 gap-4 px-4 py-2 border-b border-gray-800/40 text-sm text-gray-200"
         >
-          <div className="font-medium text-white">#{block.height}</div>
-          <div className="text-gray-400 text-sm">
-            {new Date(block.timestamp).toLocaleTimeString()}
+          <div>{block.height}</div>
+          <div>
+            {block.timestamp && !isNaN(Number(block.timestamp))
+              ? new Date(block.timestamp).toLocaleString()
+              : 'Unknown'}
           </div>
-          <div className="text-emerald-300">{block.miner}</div>
-          <div className="text-purple-300">{block.transactions}</div>
-          <div className="text-blue-300">{block.size} KB</div>
-          <div className="text-amber-300">{block.difficulty}</div>
+          <div className="truncate">{block.miner || 'Unknown'}</div>
+          <div>{block.transactions}</div>
+          <div>{block.size}</div>
+          <div className="overflow-x-auto">{block.difficulty.toFixed(4)}</div>
           <div>
             <button className="px-3 py-1 bg-blue-600/20 hover:bg-blue-600/30 rounded text-blue-300 text-sm transition-colors">
               Details
             </button>
           </div>
-          {index < 3 && (
+
+          
+          {index < 3 && animateBlocks && (
             <motion.div
               className="absolute left-0 top-0 bottom-0 w-1 bg-green-500 rounded-l-lg"
               animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+              transition={{ duration: 2, repeat: Infinity }}
             />
           )}
-        </motion.div>
+        </div>
       ))}
     </div>
   );

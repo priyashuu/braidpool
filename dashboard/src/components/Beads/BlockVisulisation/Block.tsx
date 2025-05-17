@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { Layers } from 'lucide-react';
 import { BlockList } from './BlockList';
 import { BlockStats } from './BlockStats';
@@ -11,35 +11,89 @@ export default function EnhancedBlocksTab({
   const [isLoaded, setIsLoaded] = useState(false);
   const [animateBlocks, setAnimateBlocks] = useState(false);
   const [viewMode, setViewMode] = useState('list');
+  type Block = {
+    id: string | number;
+    height: string | number;
+    timestamp: number;
+    miner: string;
+    transactions: number;
+    size: number;
+    difficulty: string | number;
+  };
+
+  const [blocks, setBlocks] = useState<Block[]>([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const socket = new WebSocket('ws://localhost:65434');
+
+    socket.onopen = () => {
+      console.log('WebSocket connection opened');
+    };
+
+    socket.onmessage = (event) => {
+      try {
+        const message = JSON.parse(event.data);
+        console.log('Received message:', message); 
+
+        
+        if (message.latest_block) {
+          const lb = message.latest_block;
+          const parsedBlock = {
+            id: lb.hash || lb.height,
+            height: lb.height || 'N/A',
+            timestamp: lb.timestamp === 'N/A' ? Date.now() : new Date(lb.timestamp).getTime(),
+            miner: lb.miner || 'Unknown',
+            transactions: lb.transactions || 0,
+            size: lb.size || 0,
+            difficulty: lb.difficulty || 'N/A',
+          };
+          setBlocks([parsedBlock]);
+          setIsLoaded(true);
+          console.log('Set blocks (latest_block):', [parsedBlock]); 
+        } else if (message?.data && Array.isArray(message.data.blocks)) {
+         
+          const parsedBlocks = message.data.blocks.slice(0, 10).map((block: any) => ({
+            id: block.hash || block.height,
+            height: block.height || 'N/A',
+            timestamp: block.time ? block.time * 1000 : Date.now(),
+            miner: block.foundBy?.description || 'Unknown',
+            transactions: block.txIndexes?.length || 0,
+            size: block.size || 0,
+            difficulty: block.difficulty || 'N/A',
+          }));
+          setBlocks(parsedBlocks);
+          setIsLoaded(true);
+          console.log('Set blocks (blocks array):', parsedBlocks); 
+        } else if (typeof message.data === "string") {
+          console.info("ℹInfo message from server:", message.data);
+        } else {
+          console.warn("No blocks found in data or unexpected format:", message);
+        }
+      } catch (err) {
+        console.error("Failed to parse WebSocket message:", err);
+        setIsLoaded(true); 
+      }
+    };
+
+    socket.onerror = (error) => {
+      console.error('WebSocket error:', error);
       setIsLoaded(true);
-      setTimeout(() => {
-        setAnimateBlocks(true);
-      }, 500);
-    }, 1000);
-    return () => clearTimeout(timer);
+    };
+
+    socket.onclose = () => {
+      console.log('WebSocket connection closed');
+    };
+
+    return () => {
+      socket.close();
+    };
   }, []);
 
-  const blockVisualizationData = useMemo(() => {
-    return Array.from({ length: 24 }, (_, i) => ({
-      id: `block-${i}`,
-      height: 1250 + i,
-      size: Math.floor(Math.random() * 900) + 300,
-      transactions: Math.floor(Math.random() * 20) + 5,
-      timestamp: new Date(Date.now() - (24 - i) * 3600000).toISOString(),
-      miner: [`miner1`, `miner2`, `miner3`, `miner4`][
-        Math.floor(Math.random() * 4)
-      ],
-      difficulty: (Math.random() * 5 + 8).toFixed(2),
-      confirmations: 24 - i,
-      color: i % 2 === 0 ? 'blue' : i % 3 === 0 ? 'purple' : 'emerald',
-    }));
-  }, []);
+  // LOG BLOCKS STATE ON EVERY RENDER
+  console.log('blocks state:', blocks);
 
   return (
-    <div className="space-y-6 animate-fade-in-up px-4 sm:px-6 md:px-8 lg:px-6 ">
+    <div className="space-y-6 animate-fade-in-up px-4 sm:px-6 md:px-8 lg:px-6">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -57,7 +111,7 @@ export default function EnhancedBlocksTab({
       <div className="relative border border-blue-500/20 rounded-2xl p-4 sm:p-6 bg-gradient-to-br from-black via-slate-900 to-black shadow-lg shadow-blue-500/10 backdrop-blur-md overflow-hidden transition-all duration-300 min-h-[300px] md:min-h-[400px] lg:min-h-[500px]">
         {viewMode === 'list' && (
           <BlockList
-            blockVisualizationData={blockVisualizationData}
+            blockVisualizationData={blocks}
             animateBlocks={animateBlocks}
             isLoaded={isLoaded}
           />

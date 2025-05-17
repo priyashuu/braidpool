@@ -40,6 +40,16 @@ class BraidSimulator:
 
             sub_parents = braid.sub_braid(bead_window, parents)
             sub_children = braid.reverse(sub_parents)
+            latest_cohort = cohorts[-1] if cohorts else []
+            latest_bead = list(latest_cohort)[-1] if latest_cohort else None
+
+
+            height = len(braid0.cohorts)
+            timestamp = getattr(latest_bead, 'timestamp', 'N/A')
+            miner = getattr(latest_bead, 'miner', 'Unknown')
+            transactions = getattr(latest_bead, 'tx_count', 0)
+            size = getattr(latest_bead, 'size', 0)
+            difficulty = self.network.target
 
             braid_data = {
                 "type": "braid_update",
@@ -47,7 +57,15 @@ class BraidSimulator:
                     "parents": {f"{int(k):064x}": list(map(lambda x: f"{int(x):064x}", v)) for k, v in sub_parents.items()},
                     "cohorts": [[f"{int(b):064x}" for b in c] for c in cohorts],
                     "highest_work_path": list(f"{int(b):064x}" for b in braid.highest_work_path(sub_parents, sub_children))
-                }
+                },
+                 "latest_block": {
+            "height": height,
+            "timestamp": timestamp,
+            "miner": miner,
+            "transactions": transactions,
+            "size": size,
+            "difficulty": difficulty
+        }
             }
 
             # Convert to JSON and broadcast to all clients
@@ -119,7 +137,7 @@ async def main():
 
     # Server configuration
     host = "0.0.0.0"
-    port = 65433
+    port = 65434
 
     # Create and start the server
     async with websockets.serve(
