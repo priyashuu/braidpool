@@ -19,6 +19,19 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Create API .env file
+        run: |
+          cat > dashboard/api/.env << EOF
+          BITCOIN_PRICE_URL=${{ secrets.BITCOIN_PRICE_URL || 'https://api.coinbase.com/v2/prices/BTC-' }}
+          BITCOIN_PRICE_URL_SUFFIX=${{ secrets.BITCOIN_PRICE_URL_SUFFIX || '/spot' }}
+          CRYPTO_URL=${{ secrets.CRYPTO_URL || 'https://api.alternative.me/v2/global' }}
+          RPC_USER=${{ secrets.RPC_USER || 'braidpool' }}
+          RPC_PASS=${{ secrets.RPC_PASS || 'test_password' }}
+          BRAIDPOOL_URL=${{ secrets.BRAIDPOOL_URL || 'http://localhost:8332' }}
+          MEMPOOL_URL=${{ secrets.MEMPOOL_URL || 'https://mempool.space' }}
+          BRAIDPOOL_API_BASE=${{ secrets.BRAIDPOOL_API_BASE || 'https://mempool.space/api/v1/' }}
+          EOF
+
       - name: Build docker-compose services
         run: docker compose build
 
