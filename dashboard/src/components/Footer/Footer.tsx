@@ -14,6 +14,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
+    <div>
     <footer className="text-gray-300 px-8 sm:px-10 md:px-20 py-8">
       <div
         className="max-w-6xl mx-auto grid 
@@ -158,6 +159,7 @@ const Footer: React.FC = () => {
         mining.
       </div>
     </footer>
+      </div>
   );
 };
 
