@@ -1,8 +1,13 @@
-FROM python:latest
+FROM python:3.12-slim
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD [ "python3", "simulator_api.py", "--host=0.0.0.0"]
+EXPOSE 65433
+
+CMD ["python", "simulator_api.py", "--host=0.0.0.0"]
